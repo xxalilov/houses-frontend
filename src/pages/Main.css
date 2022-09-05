@@ -1,0 +1,68 @@
+.main {
+  width: 100%;
+  height: calc(100vh - 4.1rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  overflow-x: hidden;
+}
+
+.main .map {
+  width: calc(100vw - 50rem);
+  height: 100%;
+}
+
+.main .content {
+  width: 50rem;
+}
+
+.main .change-button {
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.main .change-button button {
+  padding: 10px 20px;
+  border: none;
+  background-color: rgb(47, 47, 47);
+  color: rgba(255, 255, 255, 0.794);
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 2px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .main .map {
+    width: calc(100vw - 25rem);
+    height: 100%;
+  }
+
+  .main .content {
+    width: 25rem;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .main .change-button {
+    display: block;
+  }
+
+  .main .map {
+    width: 0;
+  }
+
+  .main .content {
+    width: 100%;
+  }
+
+  .open-map .map {
+    width: 100%;
+  }
+
+  .open-map .content {
+    width: 0;
+  }
+}
