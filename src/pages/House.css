@@ -1,0 +1,34 @@
+.house-container {
+  max-width: 50rem;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.house-container .house-image img {
+  width: 100%;
+  height: 30rem;
+}
+
+.house-container .house-detailes {
+  margin-top: 20px;
+}
+
+.house-container .house-detailes h3 {
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.house-container .admin-area {
+  margin-top: 20px;
+}
+
+.house-container .admin-area button {
+  padding: 7px 15px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  border: none;
+  cursor: pointer;
+  background-color: red;
+}

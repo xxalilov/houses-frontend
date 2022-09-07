@@ -1,0 +1,49 @@
+.add-house-form {
+  width: 90%;
+  margin: 20px auto;
+}
+
+.add-house-form .form .label {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.add-house-form .form .label label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.76);
+}
+
+.add-house-form .form .label input {
+  border: 1px solid rgba(0, 0, 0, 0.302);
+  outline: none;
+  height: 2rem;
+  font-size: 18px;
+}
+
+.add-house-form .form p {
+  font-size: 13px;
+  color: red;
+}
+
+.add-house-form .form .location {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.add-house-form .form .location .label {
+  margin-top: 0;
+  width: 40%;
+}
+
+.add-house-form .form button {
+  padding: 7px 15px;
+  font-size: 16px;
+  font-weight: 800;
+  border: none;
+  background-color: rgb(222, 0, 0);
+  color: #fff;
+  cursor: pointer;
+}

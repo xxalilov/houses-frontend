@@ -1,8 +1,10 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./Map.css";
 
-const Map = () => {
+const Map = (props) => {
+  const [location, setLocation] = useState();
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCrbJVc126IhDD_4nRbZabngIMz0Td1blA",
   });
@@ -11,24 +13,35 @@ const Map = () => {
 
   const center = { lat: 41.311081, lng: 69.240562 };
 
+  const handleClickMap = (e) => {
+    let lat = e.latLng.lat();
+    let lng = e.latLng.lng();
+    if (props.select) {
+      setLocation({ lat, lng });
+      props.data({ lat, lng });
+    }
+  };
+
   return (
-    <GoogleMap zoom={11} center={center} mapContainerClassName="map-container">
-      <Marker
-        position={{ lat: 41.31061760000001, lng: 69.24502474555662 }}
-        title="Xolbek Xalilov"
-      />
+    <GoogleMap
+      zoom={11}
+      center={center}
+      mapContainerClassName="map-container"
+      onClick={handleClickMap}
+    >
+      {props.houses &&
+        props.houses.map((house) => (
+          <Marker
+            position={{ lat: house.lat, lng: house.lng }}
+            key={house.id}
+          />
+        ))}
+
+      {location && (
+        <Marker position={{ lat: location.lat, lng: location.lng }} />
+      )}
     </GoogleMap>
   );
 };
-
-// function Map() {
-//   return (
-//     <GoogleMap
-//       zoom={10}
-//       center={{ lat: 44, lng: -80 }}
-//       mapContainerClassName="map-container"
-//     ></GoogleMap>
-//   );
-// }
 
 export default Map;
