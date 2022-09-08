@@ -12,7 +12,7 @@ const Main = () => {
 
   const location = useLocation();
 
-  const { doRequest, errors } = useRequest({
+  const { doRequest, errors, loading } = useRequest({
     url: `/house?${
       "search=" + location.search.slice(8)
     }&limit=7&page=${currentPage}`,

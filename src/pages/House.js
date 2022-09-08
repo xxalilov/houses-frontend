@@ -31,7 +31,9 @@ const House = () => {
   const deleteHouse = async () => {
     try {
       await axios.delete(
-        `http://206.189.200.152/api/v1/house/${location.pathname.slice(7)}`,
+        `https://xalilov-project.online/api/v1/house/${location.pathname.slice(
+          7
+        )}`,
         {
           headers: {
             Authorization: `Bearer ${authCtx.token}`,

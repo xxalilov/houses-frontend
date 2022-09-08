@@ -17,7 +17,7 @@ const AddHouseForm = (props) => {
   const navigate = useNavigate();
   const formData = new FormData();
 
-  const { doRequest, errors } = useRequest({
+  const { doRequest, errors, loading } = useRequest({
     url: "/house",
     method: "post",
     body: formData,
@@ -26,13 +26,13 @@ const AddHouseForm = (props) => {
       "Content-Type": "multipart/form-data",
     },
     onSuccess: (data) => {
+      setImage(null);
+      navigate(`/house/${data.data.id}`);
       addressRef.current.value = "";
       priceRef.current.value = "";
       areaRef.current.value = "";
       latRef.current.value = "";
       lngRef.current.value = "";
-      setImage(null);
-      navigate(`/house/${data.data.id}`);
     },
   });
 
@@ -49,47 +49,62 @@ const AddHouseForm = (props) => {
     formData.append("price", priceRef.current.value);
     formData.append("area", areaRef.current.value);
     formData.append("image", image);
-    formData.append("lat", Number(props.location.lat));
-    formData.append("lng", Number(props.location.lng));
+    formData.append("lat", props.location ? Number(props.location.lat) : null);
+    formData.append("lng", props.location ? Number(props.location.lng) : null);
     await doRequest();
     console.log(errors);
   };
 
   return (
-    <div className="add-house-form">
-      <form className="form" onSubmit={onSubmitData}>
-        <div className="label">
-          <label>address</label>
-          <input type={"text"} ref={addressRef} />
-        </div>
-        <div className="label">
-          <label>price</label>
-          <input type={"text"} ref={priceRef} />
-        </div>
-        <div className="label">
-          <label>Area in square meters</label>
-          <input type={"number"} ref={areaRef} />
-        </div>
-        <div className="label">
-          <label>image</label>
-          <input type={"file"} onChange={(e) => setImage(e.target.files[0])} />
-        </div>
+    <>
+      {loading ? (
+        <div>loading...</div>
+      ) : (
+        <div className="add-house-form">
+          {errors &&
+            errors.map((er) => (
+              <p key={Math.random()} style={{ color: "red" }}>
+                {er.message}
+              </p>
+            ))}
+          <form className="form" onSubmit={onSubmitData}>
+            <div className="label">
+              <label>address</label>
+              <input type={"text"} ref={addressRef} required />
+            </div>
+            <div className="label">
+              <label>price</label>
+              <input type={"text"} ref={priceRef} required />
+            </div>
+            <div className="label">
+              <label>Area in square meters</label>
+              <input type={"number"} ref={areaRef} required />
+            </div>
+            <div className="label">
+              <label>image</label>
+              <input
+                type={"file"}
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
 
-        <br />
-        <p>You must choose location from map!</p>
-        <div className="location">
-          <div className="label">
-            <label>lat</label>
-            <input type={"text"} ref={latRef} />
-          </div>
-          <div className="label">
-            <label>lng</label>
-            <input type={"text"} ref={lngRef} />
-          </div>
+            <br />
+            <p>You must choose location from map!</p>
+            <div className="location">
+              <div className="label">
+                <label>lat</label>
+                <input type={"text"} ref={latRef} required />
+              </div>
+              <div className="label">
+                <label>lng</label>
+                <input type={"text"} ref={lngRef} required />
+              </div>
+            </div>
+            <button type="submit">Submit</button>
+          </form>
         </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+      )}
+    </>
   );
 };
 

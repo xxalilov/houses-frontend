@@ -7,9 +7,9 @@ const Card = (props) => {
       <div className="card-header">
         <img
           src={
-            !props.house.image
+            props.house.image === "undefined"
               ? "/no-photo.jpg"
-              : `http://206.189.200.152/${props.house.image}`
+              : `https://xalilov-project.online/${props.house.image}`
           }
         />
       </div>
